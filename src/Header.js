@@ -3,7 +3,7 @@ export default function Header() {
         <header>
             <img src="Logo.svg" />
             <nav>
-            <ul>
+            <ul class="topnav">
                 <li>Home</li>
                 <li>About</li>
                 <li>Menu</li>
