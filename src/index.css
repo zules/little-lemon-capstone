@@ -368,3 +368,40 @@ height: 100%;
   font-weight: 700;
   line-height: normal;
 }
+
+footer {
+  background-color: #495E57;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 65px;
+}
+
+footer nav {
+  display: flex;
+  gap: 80px;
+}
+
+.doormat-nav ul {
+  list-style: none;
+  font-family: Karla;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: #FBDABB;
+}
+
+.doormat-nav h3 {
+  color: #EDEFEE;
+  font-family: Karla;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 12px;
+}

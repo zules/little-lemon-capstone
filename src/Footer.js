@@ -5,7 +5,7 @@ export default function Footer() {
         <footer>
             <FooterLogo />
             <nav>
-                <div>
+                <div className="doormat-nav">
                 <h3>Navigation</h3>
                 <ul>
                     <li>Home</li>
@@ -16,7 +16,7 @@ export default function Footer() {
                     <li>Login</li>
                 </ul>
                 </div>
-                <div>
+                <div className="doormat-nav">
                 <h3>Contact</h3>
                 <ul>
                     <li>Address</li>
@@ -24,7 +24,7 @@ export default function Footer() {
                     <li>email</li>
                 </ul>
                 </div>
-                <div>
+                <div className="doormat-nav">
                 <h3>Social Media Links</h3>
                 <ul>
                     <li>Address</li>

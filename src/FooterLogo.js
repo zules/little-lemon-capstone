@@ -1,10 +1,10 @@
 export default function FooterLogo() {
 
-    const logoColor = "green";
+    const logoColor = "white";
 
     return (
         <>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="100px">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320" width="200px">
   <text x="100" y="45" fontFamily="Rockwell, 'Courier New', Courier, serif" fontSize="26" fontWeight="900" textAnchor="middle" fill={logoColor} letterSpacing="3">LITTLE</text>
 
   <polyline points="65,65 170,65 170,200" fill="none" stroke={logoColor} strokeWidth="4" strokeLinecap="square" />
