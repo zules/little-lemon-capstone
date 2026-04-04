@@ -5,10 +5,10 @@ export default function FooterLogo() {
     return (
         <>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="100px">
-  <text x="100" y="45" font-family="Rockwell, 'Courier New', Courier, serif" font-size="26" font-weight="900" text-anchor="middle" fill={logoColor} letter-spacing="3">LITTLE</text>
+  <text x="100" y="45" fontFamily="Rockwell, 'Courier New', Courier, serif" fontSize="26" fontWeight="900" textAnchor="middle" fill={logoColor} letterSpacing="3">LITTLE</text>
 
-  <polyline points="65,65 170,65 170,200" fill="none" stroke={logoColor} stroke-width="4" stroke-linecap="square" />
-  <polyline points="135,245 30,245 30,110" fill="none" stroke={logoColor} stroke-width="4" stroke-linecap="square" />
+  <polyline points="65,65 170,65 170,200" fill="none" stroke={logoColor} strokeWidth="4" strokeLinecap="square" />
+  <polyline points="135,245 30,245 30,110" fill="none" stroke={logoColor} strokeWidth="4" strokeLinecap="square" />
 
   <path d="M 90 95
            C 60 110, 55 160, 75 190
@@ -19,7 +19,7 @@ export default function FooterLogo() {
            C 95 105, 95 95, 90 95 Z" 
         fill={logoColor} />
 
-  <text x="100" y="285" font-family="Rockwell, 'Courier New', Courier, serif" font-size="26" font-weight="900" text-anchor="middle" fill={logoColor} letter-spacing="3">LEMON</text>
+  <text x="100" y="285" fontFamily="Rockwell, 'Courier New', Courier, serif" fontSize="26" fontWeight="900" textAnchor="middle" fill={logoColor} letterSpacing="3">LEMON</text>
 </svg>
 </>
     )
