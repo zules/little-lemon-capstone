@@ -1,8 +1,18 @@
+import {useState} from 'react';
+
+
+
 export default function Header() {
+
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleMenu = () => setIsOpen(!isOpen);
+
     return (
         <header>
             <img src="Logo.svg" />
-            <nav>
+            <div className="menu-area">
+            <span onClick={toggleMenu} className="material-icons-outlined hamburger-icon">menu</span>
+            <nav className={`${isOpen ? 'active' : ''}`}>
             <ul className="topnav">
                 <li>Home</li>
                 <li>About</li>
@@ -12,6 +22,7 @@ export default function Header() {
                 <li>Login</li>
             </ul>
             </nav>
+            </div>
         </header>
     )
 }

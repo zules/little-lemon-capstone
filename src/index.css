@@ -18,22 +18,60 @@ code {
     monospace;
 }
 
+
+
 header {
   display: flex;
   gap: 30px;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 40px;
+
+@media (min-width: 768px) {
+    justify-content: center;
+    align-items: center;
+    }
+}
+
+header nav {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    display: block;
+    }
+}
+
+header .hamburger-icon {
+  display: block;
+  @media (min-width: 768px) {
+    display: none;
+    }
+}
+
+.menu-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
 }
 
 nav ul.topnav {
   display: flex;
+  flex-direction: column;
   list-style: none;
   gap: 30px;
   font-family: "Karla", sans-serif;
   font-weight: 700;
   font-size: 20px;
+  align-items: flex-end;
   text-transform: uppercase;
+    @media (min-width: 768px) {
+    flex-direction: row;
+    }
 }
 
 section.hero {
@@ -297,7 +335,7 @@ img.testimonial-photo {
 .specials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
-  gap: 10px;
+  gap: 40px 10px;
   width: 100%;
   justify-items: center;
   justify-content: center;
@@ -405,3 +443,4 @@ footer nav {
   line-height: normal;
   margin-bottom: 12px;
 }
+
