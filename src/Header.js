@@ -1,6 +1,5 @@
 import {useState} from 'react';
-
-
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 export default function Header() {
 
@@ -9,12 +8,12 @@ export default function Header() {
 
     return (
         <header>
-            <img src="Logo.svg" />
+            <Link to="/"><img src="Logo.svg" /></Link>
             <div className="menu-area">
             <span onClick={toggleMenu} className="material-icons-outlined hamburger-icon">menu</span>
             <nav className={`${isOpen ? 'active' : ''}`}>
             <ul className="topnav">
-                <li>Home</li>
+                <Link to="/"><li>Home</li></Link>
                 <li>About</li>
                 <li>Menu</li>
                 <li>Reservations</li>
