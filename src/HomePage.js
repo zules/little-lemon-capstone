@@ -9,14 +9,14 @@ export default function HomePage() {
                 <h1>Little Lemon</h1>
                 <h3>Chicago</h3>
                 <p>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-                <Link to="/booking"><button>Reserve a Table</button></Link>
+                <Link to="/booking"><button className="calltoaction">Reserve a Table</button></Link>
             </div>
             <img src="restaurant-food.jpg" />
         </section>
         <section className="specials">
             <div className="specials-top">
             <h1>This week's specials!</h1>
-            <button>Online Menu</button>
+            <button className="calltoaction">Online Menu</button>
             </div>
             <div className="specials-grid">
                 <div className="special-card">
