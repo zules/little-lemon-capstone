@@ -1,50 +1,13 @@
-import { useState } from 'react';
+import BookingSlot from './BookingSlot'
 
-export default function BookingForm() {
-
-const [formData, setFormData] = useState({
-    resdate: '',
-    restime: '',
-    guests: 1,
-    seatingType: '',
-    occasion: 'None',
-  });
-
-const [step, setStep] = useState(1);
-
-const handleChange = (e) => {
-setFormData({ ...formData, [e.target.name]: e.target.value });
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  if (step < 3) {
-    setStep(prev => prev + 1);
-  } else {
-    console.log("Sending data to API:", formData);
-    alert("Form submitted successfully!");
-  }
-};
-
-const handleBack = () => {
-  if (step > 1) {
-    setStep(prev => prev - 1);
-  }
-};
-
-const handleGuestCount = (amount) => {
-  setFormData(prev => ({
-    ...prev,
-    guests: Math.max(1, prev.guests + amount)
-  }));
-};
+export default function BookingForm({ step, availableTimes, formData, handleChange, handleSubmit, handleGuestCount, handleBack, dispatchDate, handleDateChange }) {
 
 if (step === 1) {
     return (
         <form className="resform" onSubmit={handleSubmit}>
             <div className="forminputpair">
             <label className="formlabel" htmlFor="resdate">Select date</label>
-            <div className="input-wrapper"><input className="date-input" type="date" id="resdate" name="resdate" value={formData.resdate} onChange={handleChange} /></div>
+            <div className="input-wrapper"><input className="date-input" type="date" id="resdate" name="resdate" value={formData.resdate} onChange={handleDateChange} /></div>
             </div>
             <div className="forminputpair">
             <label className="formlabel" htmlFor="restime">Select time</label>
@@ -54,12 +17,9 @@ if (step === 1) {
             value={formData.restime}
             onChange={handleChange}
             >
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
-                <option value="22:00">22:00</option>
+                {availableTimes.map((time) => (
+                    <BookingSlot key={time} time={time} />
+                ))}
             </select>
             </div>
                 <fieldset className="guest-stepper">
