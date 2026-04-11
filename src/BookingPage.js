@@ -1,9 +1,9 @@
 import { useState, useReducer } from 'react';
 import BookingForm from "./BookingForm"
 
-const placeholderTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
+export const placeholderTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
 
-const timeSlotReducer = (state, action) => {
+export const timeSlotReducer = (state, action) => {
     switch (action.type) {
         case 'updateTimes':
             console.log(`selected ${action.payload}`)
