@@ -2,14 +2,16 @@ import { useState, useReducer } from 'react';
 import BookingForm from "./BookingForm"
 
 export const placeholderTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
+const todaysTimes = window.fetchAPI(new Date());
 
 export const timeSlotReducer = (state, action) => {
+    const today = new Date();
     switch (action.type) {
         case 'updateTimes':
             console.log(`selected ${action.payload}`)
-            return state;
+            return action.payload;
         case 'initializeTimes':
-            return placeholderTimes;
+            return todaysTimes;
         default:
             return state;
     }
@@ -35,10 +37,17 @@ const handleChange = (e) => {
     };
 
 const handleDateChange = (e) => {
+
     const selectedDate = e.target.value;
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    dispatchDate({ type: 'updateTimes', payload: selectedDate });
+    setFormData({ ...formData, [e.target.name]: selectedDate });
+
+    const fetchedTimes = window.fetchAPI(new Date(selectedDate));
+
+    dispatchDate({ type: 'updateTimes', payload: fetchedTimes });
     }
+
+
+
 
     const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,7 +79,7 @@ const handleDateChange = (e) => {
         </section>
         <section>
             <BookingForm
-            availableTimes={availableTimes}
+            availableTimes={todaysTimes}
             step={step}
             formData={formData}
             handleChange={handleChange}
