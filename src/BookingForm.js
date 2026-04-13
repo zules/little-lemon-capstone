@@ -1,6 +1,15 @@
 import BookingSlot from './BookingSlot'
 
+
+
 export default function BookingForm({ step, availableTimes, formData, handleChange, handleSubmit, handleGuestCount, handleBack, dispatchDate, handleDateChange }) {
+
+const formattedDate = new Date(formData.resdate).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC'
+});
+
 
 if (step === 1) {
     return (
@@ -104,7 +113,26 @@ if (step === 1) {
 
 if (step === 2) {
     return (
-    <p>Page 2</p>
+    <>
+        <dl className="summary-list">
+  <div>
+    <dt>Selected Date:</dt>
+    <dd>{formattedDate}</dd>
+  </div>
+  <div>
+    <dt>Selected Time:</dt>
+    <dd>{formData.restime}</dd>
+  </div>
+<div>
+    <dt>Diners:</dt>
+    <dd>{formData.guests}</dd>
+  </div>
+  <div>
+    <dt>Seating Type:</dt>
+    <dd>{formData.seatingType ? formData.seatingType : `No preference`}</dd>
+  </div>
+</dl>
+    </>
     )
 }
 

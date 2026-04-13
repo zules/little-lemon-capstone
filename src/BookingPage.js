@@ -27,7 +27,7 @@ export default function BookingPage() {
         resdate: '',
         restime: '',
         guests: 1,
-        seatingType: '',
+        seatingType: null,
         occasion: 'None',
     });
 

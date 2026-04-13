@@ -611,3 +611,28 @@ gap: 30px;
 align-self: stretch;
 justify-content: center;
 }
+
+.summary-list {
+  display: inline-grid;
+  grid-template-columns: max-content auto;
+  column-gap: 25px;
+  row-gap: 5px;
+  color: #000;
+  font-family: 'Karla', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.summary-list dt {
+  grid-column: 1;
+}
+
+.summary-list dd {
+  grid-column: 2;
+  margin: 0;
+  font-weight: 300;
+}
+
+.summary-list div {
+  display: contents; 
+}
