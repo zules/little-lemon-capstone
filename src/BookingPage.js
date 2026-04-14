@@ -1,22 +1,12 @@
 import { useState, useReducer } from 'react';
 import { useNavigate } from "react-router-dom";
 import BookingForm from "./BookingForm"
+import { timeSlotReducer } from './timeSlotReducer';
 
 export const placeholderTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
 const todaysTimes = window.fetchAPI(new Date());
 
-export const timeSlotReducer = (state, action) => {
-    const today = new Date();
-    switch (action.type) {
-        case 'updateTimes':
-            console.log(`selected ${action.payload}`)
-            return action.payload;
-        case 'initializeTimes':
-            return todaysTimes;
-        default:
-            return state;
-    }
-}
+
 
 export default function BookingPage() {
 
