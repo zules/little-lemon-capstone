@@ -1,4 +1,5 @@
 import { useState, useReducer } from 'react';
+import { useNavigate } from "react-router-dom";
 import BookingForm from "./BookingForm"
 
 export const placeholderTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
@@ -21,6 +22,8 @@ export default function BookingPage() {
 
     const [availableTimes, dispatchDate] = useReducer(timeSlotReducer, placeholderTimes)
 
+    const navigate = useNavigate();
+
     const [step, setStep] = useState(1);
 
     const [formData, setFormData] = useState({
@@ -29,6 +32,12 @@ export default function BookingPage() {
         guests: 1,
         seatingType: null,
         occasion: 'None',
+        guestName: '',
+        guestEmail: '',
+        guestEmailRetype: '',
+        phoneNumber: '',
+        contactPreference: 'calls',
+        comments: '',
     });
 
 
@@ -49,13 +58,17 @@ const handleDateChange = (e) => {
 
 
 
-    const handleSubmit = (e) => {
+    const submitForm = (e) => {
     e.preventDefault();
-    if (step < 3) {
+    if (step < 2) {
         setStep(prev => prev + 1);
     } else {
-        console.log("Sending data to API:", formData);
-        alert("Form submitted successfully!");
+    e.preventDefault();
+    const success = window.submitAPI(formData);
+    if (success) {
+        navigate("/confirmation", { state: formData });
+    }
+
     }
     };
 
@@ -83,7 +96,7 @@ const handleDateChange = (e) => {
             step={step}
             formData={formData}
             handleChange={handleChange}
-            handleSubmit={handleSubmit}
+            submitForm={submitForm}
             handleBack={handleBack}
             handleGuestCount={handleGuestCount}
             dispatchDate={dispatchDate}

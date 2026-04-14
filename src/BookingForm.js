@@ -1,19 +1,15 @@
 import BookingSlot from './BookingSlot'
+import BookingMainSelections from './BookingMainSelections'
 
 
+export default function BookingForm({ step, availableTimes, formData, handleChange, submitForm, handleGuestCount, handleBack, dispatchDate, handleDateChange }) {
 
-export default function BookingForm({ step, availableTimes, formData, handleChange, handleSubmit, handleGuestCount, handleBack, dispatchDate, handleDateChange }) {
 
-const formattedDate = new Date(formData.resdate).toLocaleDateString('en-US', {
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'UTC'
-});
 
 
 if (step === 1) {
     return (
-        <form className="resform" onSubmit={handleSubmit}>
+        <form className="resform" onSubmit={submitForm}>
             <div className="forminputpair">
             <label className="formlabel" htmlFor="resdate">Select date</label>
             <div className="input-wrapper"><input className="date-input" type="date" id="resdate" name="resdate" value={formData.resdate} onChange={handleDateChange} /></div>
@@ -114,26 +110,111 @@ if (step === 1) {
 if (step === 2) {
     return (
     <>
-        <dl className="summary-list">
-  <div>
-    <dt>Selected Date:</dt>
-    <dd>{formattedDate}</dd>
-  </div>
-  <div>
-    <dt>Selected Time:</dt>
-    <dd>{formData.restime}</dd>
-  </div>
-<div>
-    <dt>Diners:</dt>
-    <dd>{formData.guests}</dd>
-  </div>
-  <div>
-    <dt>Seating Type:</dt>
-    <dd>{formData.seatingType ? formData.seatingType : `No preference`}</dd>
-  </div>
-</dl>
+    <div className="booking-page-info-container">
+        <h3 className="booking-back" role="button" onClick={handleBack}>
+            <span className="material-symbols-outlined">arrow_back</span>Back
+        </h3>
+        <BookingMainSelections
+        formData={formData}
+        />
+    </div>
+
+     <form className="resform" onSubmit={submitForm}>
+        <div className="forminputpair">
+            <label className="formlabel" htmlFor="guest-name">Your Name</label>
+            <div className="input-wrapper">
+                <input
+                className="formlabel"
+                type="text"
+                id="guest-name"
+                name="guestName"
+                placeholder="Enter full name"
+                value={formData.guestName}
+                onChange={handleChange}
+                />
+            </div>
+        </div>
+        <div className="forminputpair">
+            <label className="formlabel" htmlFor="guest-email">Email</label>
+            <div className="input-wrapper">
+                <input
+                className="formlabel"
+                type="email"
+                id="guest-email"
+                name="guestEmail"
+                placeholder="Enter email"
+                value={formData.guestEmail}
+                onChange={handleChange}
+                />
+            </div>
+        </div>
+        <div className="forminputpair">
+            <label className="formlabel" htmlFor="guest-email-retype">Retype Email</label>
+            <div className="input-wrapper">
+                <input
+                className="formlabel"
+                type="email"
+                id="guest-email-retype"
+                name="guestEmailRetype"
+                placeholder="Enter email"
+                value={formData.guestEmailRetype}
+                onChange={handleChange}
+                />
+            </div>
+        </div>
+        <div className="forminputpair">
+            <label className="formlabel" htmlFor="phone-number">Phone Number</label>
+            <div className="input-wrapper">
+                <input
+                className="formlabel"
+                type="text"
+                id="phone-number"
+                name="phoneNumber"
+                placeholder="(xxx) xxx-xxxx"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                />
+            </div>
+
+        <fieldset className="formlabel">
+        <label className="radio-option">
+            <input
+            type="radio"
+            name="contactPreference"
+            value="calls"
+            checked={formData.contactPreference === "calls"}
+            onChange={handleChange}
+            />
+            Prefer calls
+        </label>
+        <label className="radio-option">
+            <input
+            type="radio"
+            name="contactPreference"
+            value="texts"
+            checked={formData.contactPreference === "texts"}
+            onChange={handleChange}
+            />
+            Prefer texts
+        </label>
+        </fieldset>
+        </div>
+        <div className="forminputpair">
+        <label htmlFor="comments">Additional Comments</label>
+            <textarea
+            id="comments"
+            name="comments"
+            rows="3"
+            placeholder="Type comment"
+            value={formData.comments}
+            onChange={handleChange}
+            ></textarea>
+        </div>
+    <input className="calltoaction" type="submit" value="Reserve Table" />
+    </form>
     </>
     )
 }
+
 
 }
