@@ -1,18 +1,39 @@
 import BookingSlot from './BookingSlot'
 import BookingMainSelections from './BookingMainSelections'
-
+import {useState} from 'react'
 
 export default function BookingForm({ step, availableTimes, formData, handleChange, submitForm, handleGuestCount, handleBack, dispatchDate, handleDateChange }) {
 
+const [emailsTouched, setEmailsTouched] = useState(false);
 
+const emailsMatch = formData.guestEmail === formData.guestEmailRetype;
 
+const displayEmailError = emailsTouched && !emailsMatch;
+
+const pageOneIsValid = () => {
+  return (
+    formData.resdate !== "" &&
+    formData.restime !== ""
+  );
+};
+
+const pageTwoIsValid = () => {
+  return (
+    formData.guestName !== "" &&
+    formData.guestEmail !== "" &&
+    formData.guestEmailRetype !== "" &&
+    formData.guestEmail?.includes("@") &&
+    formData.phoneNumber !== "" &&
+    emailsMatch
+  );
+};
 
 if (step === 1) {
     return (
         <form className="resform" onSubmit={submitForm}>
             <div className="forminputpair">
             <label className="formlabel" htmlFor="resdate">Select date</label>
-            <div className="input-wrapper"><input className="date-input" type="date" id="resdate" name="resdate" value={formData.resdate} onChange={handleDateChange} /></div>
+            <div className="input-wrapper"><input className="date-input" type="date" id="resdate" name="resdate" value={formData.resdate} onChange={handleDateChange} required /></div>
             </div>
             <div className="forminputpair">
             <label className="formlabel" htmlFor="restime">Select time</label>
@@ -21,7 +42,9 @@ if (step === 1) {
             name="restime"
             value={formData.restime}
             onChange={handleChange}
+            required
             >
+                <option value="">Choose time</option>
                 {availableTimes.map((time) => (
                     <BookingSlot key={time} time={time} />
                 ))}
@@ -102,7 +125,7 @@ if (step === 1) {
                 <option>Engagement</option>
             </select>
             </div>
-            <input className="calltoaction" type="submit" value="Next" />
+            <input className="calltoaction" type="submit" value="Next" disabled={!pageOneIsValid()}/>
         </form>
     )
 }
@@ -112,7 +135,7 @@ if (step === 2) {
     <>
     <div className="booking-page-info-container">
         <h3 className="booking-back" role="button" onClick={handleBack}>
-            <span className="material-symbols-outlined">arrow_back</span>Back
+            <span aria-label="On Click" className="material-symbols-outlined">arrow_back</span>Back
         </h3>
         <BookingMainSelections
         formData={formData}
@@ -131,12 +154,13 @@ if (step === 2) {
                 placeholder="Enter full name"
                 value={formData.guestName}
                 onChange={handleChange}
+                required
                 />
             </div>
         </div>
         <div className="forminputpair">
             <label className="formlabel" htmlFor="guest-email">Email</label>
-            <div className="input-wrapper">
+            <div className={displayEmailError ? "input-wrapper invalid" : "input-wrapper"}>
                 <input
                 className="formlabel"
                 type="email"
@@ -145,12 +169,13 @@ if (step === 2) {
                 placeholder="Enter email"
                 value={formData.guestEmail}
                 onChange={handleChange}
+                required
                 />
             </div>
         </div>
         <div className="forminputpair">
             <label className="formlabel" htmlFor="guest-email-retype">Retype Email</label>
-            <div className="input-wrapper">
+            <div className={displayEmailError ? "input-wrapper invalid" : "input-wrapper"}>
                 <input
                 className="formlabel"
                 type="email"
@@ -159,20 +184,24 @@ if (step === 2) {
                 placeholder="Enter email"
                 value={formData.guestEmailRetype}
                 onChange={handleChange}
+                onBlur={() => setEmailsTouched(true)}
+                required
                 />
             </div>
+            { displayEmailError ? <p>ERROR: please ensure email is typed correctly.</p> : "" }
         </div>
         <div className="forminputpair">
             <label className="formlabel" htmlFor="phone-number">Phone Number</label>
             <div className="input-wrapper">
                 <input
                 className="formlabel"
-                type="text"
+                type="tel"
                 id="phone-number"
                 name="phoneNumber"
                 placeholder="(xxx) xxx-xxxx"
                 value={formData.phoneNumber}
                 onChange={handleChange}
+                required
                 />
             </div>
 
@@ -210,7 +239,7 @@ if (step === 2) {
             onChange={handleChange}
             ></textarea>
         </div>
-    <input className="calltoaction" type="submit" value="Reserve Table" />
+    <input className="calltoaction" type="submit" disabled={!pageTwoIsValid()} value="Reserve Table" />
     </form>
     </>
     )
